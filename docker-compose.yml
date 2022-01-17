@@ -1,0 +1,9 @@
+version: "1.0"
+
+services:
+  details:
+    build: src/details/
+    environment:
+      SERVICE_VERSION: v1
+      ENABLE_EXTERNAL_BOOK_SERVICE: false
+      
