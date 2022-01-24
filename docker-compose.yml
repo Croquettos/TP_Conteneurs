@@ -1,9 +1,49 @@
-version: "1.0"
+version: "ZIGGY"
 
 services:
   details:
-    build: src/details/
+    build: src/details
     environment:
-      SERVICE_VERSION: v1
-      ENABLE_EXTERNAL_BOOK_SERVICE: false
-      
+      SERVICE_VERSION: "v1"
+      ENABLE_EXTERNAL_BOOK_SERVICE: "false"
+    ports:
+      - "9080"
+  mongodb:
+    build: src/mongodb
+    ports:
+      - "27017"
+    volumes:
+      - mongovolume:/data/db
+  mysql:
+    build: src/mysql
+    ports:
+      - "3306"
+    volumes:
+      - mysqlvolume:/var/lib/mysql
+  productpage:
+    build: src/productpage
+    environment:
+      FLOOD_FACTOR: "0"
+    ports:
+      - "8080:9080"
+    links:
+      - ratings
+      - reviews
+      - details
+  ratings:
+    build: src/ratings
+    environment:
+      SERVICE_VERSION: "v1"
+    ports:
+      - "9080"
+  reviews:
+    build: src/reviews/reviews-wlpcfg
+    environment:
+      SERVICE_VERSION: "v1"
+      ENABLE_RATINGS: "false"
+      STAR_COLOR: "black"   
+    ports:
+      - "9080" 
+volumes:
+  mongovolume: {}
+  mysqlvolume: {}
