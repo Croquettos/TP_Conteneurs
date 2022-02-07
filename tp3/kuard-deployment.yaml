@@ -1,0 +1,28 @@
+# kubectl get namespaces pour voir les namespaces
+# kubectl get pods pour voir les pods
+# kubectl apply -f kuard.yaml
+# kubectl port-forward pod/kuard 8080:8080 pour exposer le pod
+# kubectl delete -f kuard.yaml pour supprimer le pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+  labels:
+    app: kuard
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kuard
+  template:
+    metadata:
+      labels:
+        app: kuard
+    spec:
+      containers:
+        - image: gcr.io/kuar-demo/kuard-amd64:blue
+          name: kuard
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
