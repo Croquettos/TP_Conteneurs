@@ -37,13 +37,7 @@ services:
     ports:
       - "9080"
   reviews:
-    build: src/reviews/reviews-wlpcfg
-    environment:
-      SERVICE_VERSION: "v1"
-      ENABLE_RATINGS: "false"
-      STAR_COLOR: "black"   
-    ports:
-      - "9080" 
+    image: docker.io/istio/examples-bookinfo-reviews-v1:1.16.2
 volumes:
   mongovolume: {}
   mysqlvolume: {}
