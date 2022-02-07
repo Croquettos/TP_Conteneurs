@@ -1,4 +1,4 @@
-version: "ZIGGY"
+version: "v1"
 
 services:
   details:

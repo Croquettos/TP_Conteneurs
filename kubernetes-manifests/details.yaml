@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: details
+spec:
+  containers:
+    - build: ../src/details
+      name: details
+      environment:
+        SERVICE_VERSION: "v1"
+        ENABLE_EXTERNAL_BOOK_SERVICE: "false"
+      ports:
+        - containerPort: 9080
+          name: http
+          protocol: TCP
