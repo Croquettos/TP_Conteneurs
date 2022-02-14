@@ -4,12 +4,12 @@ metadata:
   name: details
 spec:
   containers:
-    - build: ../src/details
-      name: details
-      environment:
-        SERVICE_VERSION: "v1"
-        ENABLE_EXTERNAL_BOOK_SERVICE: "false"
+    - name: details
+      image: localhost:5001/details:1.0
+      env:
+        - name: SERVICE_VERSION
+          value: "v1"
+        - name: ENABLE_EXTERNAL_BOOK_SERVICE
+          value: "false"
       ports:
         - containerPort: 9080
-          name: http
-          protocol: TCP

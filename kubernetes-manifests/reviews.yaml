@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reviews
+spec:
+  containers:
+    - image: localhost:5001/reviews:1.0
+      name: reviews

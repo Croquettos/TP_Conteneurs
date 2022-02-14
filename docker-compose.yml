@@ -3,6 +3,7 @@ version: "v1"
 services:
   details:
     build: src/details
+    image: localhost:5001/details:1.0
     environment:
       SERVICE_VERSION: "v1"
       ENABLE_EXTERNAL_BOOK_SERVICE: "false"
@@ -10,18 +11,23 @@ services:
       - "9080"
   mongodb:
     build: src/mongodb
+    image: localhost:5001/mongodb:1.0
     ports:
       - "27017"
     volumes:
       - mongovolume:/data/db
   mysql:
     build: src/mysql
+    image: localhost:5001/mysql:1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306"
     volumes:
       - mysqlvolume:/var/lib/mysql
   productpage:
     build: src/productpage
+    image: localhost:5001/productpage:1.0
     environment:
       FLOOD_FACTOR: "0"
     ports:
@@ -32,6 +38,7 @@ services:
       - details
   ratings:
     build: src/ratings
+    image: localhost:5001/ratings:1.0
     environment:
       SERVICE_VERSION: "v1"
     ports:
