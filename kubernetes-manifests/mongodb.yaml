@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: mongodb
+  labels:
+    app: mongodb
 spec:
   containers:
     - image: localhost:5001/mongodb:1.0
