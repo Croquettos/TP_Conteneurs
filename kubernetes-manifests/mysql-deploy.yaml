@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - image: docker.io/istio/examples-bookinfo-mysqldb:1.16.2
+          name: mysql
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysqlpassword
+                key: password
+                optional: false
+          args: ["--default-authentication-plugin", "mysql_natice_password"]
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: mysqlvolume
+      volumes:
+      - name: mysqlvolume
