@@ -13,3 +13,9 @@ spec:
           value: "0"
       ports:
         - containerPort: 9080
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 9080
+        initialDelaySeconds: 3
+        periodSeconds: 3
