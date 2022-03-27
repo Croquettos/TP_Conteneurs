@@ -18,26 +18,73 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ratings
+  name: ratings-v1
   labels:
-    app: ratings
+    app: ratings-v1
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: ratings
+      app: ratings-v1
   template:
     metadata:
       labels:
-        app: ratings
+        app: ratings-v1
     spec:
       containers:
-        - image: docker.io/istio/examples-bookinfo-mongodb:1.16.2
+        - image: localhost:5001/ratings:1.0
           name: ratings
+          readinessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            exec:
+              command:
+              - cat
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9080
+            initialDelaySeconds: 15
+            periodSeconds: 15
           env:
-            - name: SERVICE_VERSION
-              value: "v2"
-            - name: DB_TYPE
-              value: "mysql"
+          - name: SERVICE_VERSION
+            value: "v1"
+          ports:
+            - containerPort: 9080
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratings-v2
+  labels:
+    app: ratings-v2
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ratings-v2
+  template:
+    metadata:
+      labels:
+        app: ratings-v2
+    spec:
+      containers:
+        - image: localhost:5001/ratings:1.0
+          name: ratings
+          readinessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            exec:
+              command:
+              - cat
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9080
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          env:
+          - name: SERVICE_VERSION
+            value: "v2"
           ports:
             - containerPort: 9080

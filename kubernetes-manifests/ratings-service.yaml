@@ -4,7 +4,7 @@ metadata:
   name: ratings
 spec:
   selector:
-    app: ratings
+    app: ratings-v2 ### Pour deployer des ratings-v1, il suffit de changer ratings-v2 en ratings-v1 ici
   ports:
     - protocol: TCP
       port: 9080

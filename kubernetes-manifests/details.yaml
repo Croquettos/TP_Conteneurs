@@ -8,6 +8,18 @@ spec:
   containers:
     - name: details
       image: localhost:5001/details:1.0
+      readinessProbe:
+        initialDelaySeconds: 15
+        periodSeconds: 15
+        exec:
+          command:
+            - cat
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 9080
+        initialDelaySeconds: 15
+        periodSeconds: 15
       env:
         - name: SERVICE_VERSION
           value: "v1"
