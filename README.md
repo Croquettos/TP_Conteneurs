@@ -15,6 +15,15 @@ Le code des différents services est présent dans `src/`.
 
 L'API visible de l'utilisateur est définie dans le fichier `swagger.yaml`. Pour visualiser le fichier, vous pouvez utiliser le [Swagger editor](https://editor.swagger.io/).
 
+## Registry
+
+Le registry local est créé avec le script kind-with-registry.sh. 
+
+## Réponses aux questions
+
+Pour le TP3 les réponses sont dans le dossier TP3.
+Pour le TP4, les réponses sont dans les commits.
+
 ## Groupe
 Maxime Audigié - maxime.audigie@etu.uca.fr
 Lucas Peyron - lucas.peyron@etu.uca.fr
